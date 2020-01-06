@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('UserID')->nullable();
             $table->integer('OfficePosition')->unsigned();
             $table->text('ServerRef')->nullable()->default('No ServerRef');
-            $table->timestamp('LastLogin')->nullable()->default("0000-00-00 00:00:00");
+            $table->timestamp('LastLogin')->nullable();
             $table->boolean('IsOnline')->nullable()->default(false);
             $table->timestamps();
         });

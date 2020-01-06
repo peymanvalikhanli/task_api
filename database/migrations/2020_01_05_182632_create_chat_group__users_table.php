@@ -19,9 +19,9 @@ class CreateChatGroupUsersTable extends Migration
             $table->integer('Permission')->unsigned()->nullable();
             $table->integer('RemoveFromGroup')->unsigned()->nullable();
             $table->integer('RemoveBy')->unsigned()->nullable();
-            $table->timestamp('RemoveDate')->nullable()->default("000-00-00 00:00:00");
+            $table->timestamp('RemoveDate')->nullable();
             $table->integer('LeaveGroup')->unsigned()->nullable();
-            $table->timestamp('LeaveDate')->nullable()->default("000-00-00 00:00:00");
+            $table->timestamp('LeaveDate')->nullable();
             $table->timestamps();
             $table->primary(['ChatGroupID', 'UserID']);
         });

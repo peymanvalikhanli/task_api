@@ -22,7 +22,7 @@ class CreateChatP2PSTable extends Migration
             $table->integer('ChatType')->unsigned()->nullable();
             $table->string('File', 150)->nullable()->default('No File');
             $table->boolean('IsDelete')->nullable()->default(false);
-            $table->timestamp('SeenDate')->nullable()->default("0000-00-00 00:00:00");
+            $table->timestamp('SeenDate')->nullable();
             $table->timestamps();
         });
     }

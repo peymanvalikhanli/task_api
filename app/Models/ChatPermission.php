@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChatP2P extends Model
+class ChatPermission extends Model
 {
     //
 }
