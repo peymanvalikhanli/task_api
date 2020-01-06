@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Users;
+
 class UsersController extends Controller
 {
     /**
@@ -15,6 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         //
+        return response()->json(Users::get(), 200);
     }
 
     /**
@@ -25,6 +28,7 @@ class UsersController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -46,7 +50,16 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        if (is_numeric($id))
+        {
+            return response()->json(Users::find($id), 200);
+        }
+        else
+        {
+            $column = 'UserName'; // This is the name of the column you wish to search
+            return response()->json(Users::where($column , '=', $id)->first(), 200);
+        }
+
     }
 
     /**

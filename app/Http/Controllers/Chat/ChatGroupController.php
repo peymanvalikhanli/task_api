@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Chat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\models\ChatGroup;
+
 class ChatGroupController extends Controller
 {
     /**
