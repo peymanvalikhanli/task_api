@@ -15,8 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('UserName', 50)->unique();
-            $table->string('Password', 150)->unique();
+            $table->string('UserName', 50);
+            $table->string('Password', 150);
             $table->string('Avatar', 150)->nullable()->default('No Avatar');
             $table->string('token', 150)->nullable()->default('No token');
             $table->bigInteger('UserID')->nullable();
@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('LastLogin')->nullable();
             $table->boolean('IsOnline')->nullable()->default(false);
             $table->timestamps();
+            $table->unique(['UserName','Password']);
         });
     }
 

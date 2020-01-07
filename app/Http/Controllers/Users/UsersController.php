@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Exception;
+
 use App\Models\Users;
 
 class UsersController extends Controller
@@ -16,7 +18,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
         return response()->json(Users::get(), 200);
     }
 
@@ -27,8 +28,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
-
+       //
     }
 
     /**
@@ -39,7 +39,13 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $request["Password"]=md5($request->Password);
+            $data = Users::create($request->all());
+            return response()->json($data, 201);
+        }catch(\Exception $exception){
+            return response()->json($exception, 400);
+        }
     }
 
     /**
@@ -82,7 +88,14 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = Users::find($id);
+        if(is_null($user)){
+            $data = array('data' => "Not found data");
+            return response()->json($data, 404);
+        }
+        $user->update($request->all());
+        return response()->json($user, 200);
+
     }
 
     /**
@@ -93,6 +106,14 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Users::find($id);
+        if(is_null($user)){
+            $data = array('data' => "Not found data");
+            return response()->json($data, 404);
+        }
+        $user->update($request->all());
+        $data = array('data' => "record is delete" );
+        return response()->json($data, 204);
+
     }
 }
