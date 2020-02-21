@@ -89,7 +89,7 @@ class UserLogController extends Controller
     public function update(Request $request, $id)
     {
         $UserLog = UserLog::find($id);
-        if(is_null($user)){
+        if(is_null($UserLog)){
             $data = array('data' => "Not found data");
             return response()->json($data, 404);
         }
@@ -105,6 +105,13 @@ class UserLogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $UserLog = UserLog::find($id);
+        if(is_null($UserLog)){
+            $data = array('data' => "Not found data");
+            return response()->json($data, 404);
+        }
+        $UserLog->delete();
+        $data = array('data' => "record is delete" );
+        return response()->json($data, 204);
     }
 }

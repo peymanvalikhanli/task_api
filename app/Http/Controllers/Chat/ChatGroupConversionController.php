@@ -104,6 +104,13 @@ class ChatGroupConversionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ChatGroupConversion = ChatGroupConversion::find($id);
+        if(is_null($ChatGroupConversion)){
+            $data = array('data' => "Not found data");
+            return response()->json($data, 404);
+        }
+        $ChatGroupConversion->delete();
+        $data = array('data' => "record is delete" );
+        return response()->json($data, 204);
     }
 }

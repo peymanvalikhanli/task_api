@@ -40,6 +40,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         try{
+            //TODO Hash::make() 
             $request["Password"]=md5($request->Password);
             $data = Users::create($request->all());
             return response()->json($data, 201);
@@ -111,7 +112,7 @@ class UsersController extends Controller
             $data = array('data' => "Not found data");
             return response()->json($data, 404);
         }
-        $user->update($request->all());
+        $user->delete();
         $data = array('data' => "record is delete" );
         return response()->json($data, 204);
 
