@@ -10,18 +10,26 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class PostCreatedEvent
+class PostCreatedEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $data;
+    public $post ;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct (array $post)
     {
         //
+        $this->data = array(
+            'power'=> '10'
+        );
+
+        $this->post=$post; 
+
+        // $this->activity=$a;
     }
 
     /**
@@ -31,6 +39,13 @@ class PostCreatedEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('channel-demo');
+        // return ['channel'];
     }
+
+    // public function broadcastwith(){
+    //     return[
+    //         'name'=> $this->post['name ']
+    //     ]; 
+    // }
 }
