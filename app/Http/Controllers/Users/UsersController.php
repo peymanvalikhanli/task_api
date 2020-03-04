@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 use Exception;
 
@@ -41,7 +42,9 @@ class UsersController extends Controller
     {
         try{
             //TODO Hash::make() 
-            $request["Password"]=md5($request->Password);
+            // $request["Password"]=md5($request->Password);
+            $request["Password"] = Hash::make($request->Password);
+            $request["token"] = Hash::make($request->email);
             $data = Users::create($request->all());
             return response()->json($data, 201);
         }catch(\Exception $exception){

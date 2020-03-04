@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Events\PostCreatedEvent;
 
+use App\Http\controllers\export; 
+use App\Http\controllers\message_type; 
+use App\Http\controllers\redirect_address; 
 
 class PostController extends Controller
 {
@@ -14,7 +17,6 @@ class PostController extends Controller
         // $event = new PostCreatedEvent(["name"=>"peyman"]);
         // event($event);
         // dd();
-
-        return export::data("test",  array( name => "peyman"));
+        return export::redirect("test", redirect_address::$home); 
     }
 }

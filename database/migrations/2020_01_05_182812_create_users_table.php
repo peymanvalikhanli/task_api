@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('LastLogin')->nullable();
             $table->boolean('IsOnline')->nullable()->default(false);
             $table->timestamps();
-            $table->unique(['email','Password']);
+            $table->unique(['email']);
         });
     }
 
