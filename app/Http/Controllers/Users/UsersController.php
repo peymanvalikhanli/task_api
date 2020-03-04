@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
+use App\Http\controllers\export; 
+use App\Http\controllers\message_type; 
+use App\Http\controllers\redirect_address; 
+
 use Exception;
 
 use App\Models\Users;
@@ -59,7 +63,9 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        $request=  \Request::get('user_id');
+        return response()->json($request,200);
         if (is_numeric($id))
         {
             return response()->json(Users::find($id), 200);

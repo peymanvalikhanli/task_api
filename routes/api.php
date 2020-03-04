@@ -28,4 +28,4 @@ Route::apiResource('chatgroupusers','Chat\ChatGroupUsersController');
 Route::apiResource('chatgroupconversion','Chat\ChatGroupConversionController');
 Route::apiResource('chatgroup','Chat\ChatGroupController');
 
-
+Route::post('Login', 'Users\globalController@login'); 
