@@ -31,7 +31,7 @@ class AuthKey
         }
 
         $column = 'token'; // This is the name of the column you wish to search
-        $user = Users::where($column , '=', '$2y$10$18XyFbvlziaUUkTUQdyLUOH3fovzDJvXqUXuU.8yqeEOK6fp9CWva')->first();
+        $user = Users::where($column , '=', $token)->first();
         if(is_numeric($user->id)){
             $request["user_id"]= $user->id; 
             return $next($request);
