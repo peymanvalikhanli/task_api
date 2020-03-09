@@ -9,6 +9,7 @@ use Exception;
 
 use App\models\ChatGroup;
 
+
 class ChatGroupController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class ChatGroupController extends Controller
      */
     public function index()
     {
-        return response()->json(ChatGroupCache::get(), 200);
+        return response()->json(ChatGroup::get(), 200);
     }
 
     /**
@@ -40,7 +41,7 @@ class ChatGroupController extends Controller
     public function store(Request $request)
     {
         try{
-            $data = ChatGroupCache::create($request->all());
+            $data = ChatGroup::create($request->all());
             return response()->json($data, 201);
         }catch(\Exception $exception){
             return response()->json($exception, 400);
@@ -57,7 +58,7 @@ class ChatGroupController extends Controller
     {
         if (is_numeric($id))
         {
-            return response()->json(ChatGroupCache::find($id), 200);
+            return response()->json(ChatGroup::find($id), 200);
         }
         else
         {
@@ -75,13 +76,13 @@ class ChatGroupController extends Controller
      */
     public function edit($id)
     {
-        $ChatGroupCache = ChatGroupCache::find($id);
-        if(is_null($user)){
-            $data = array('data' => "Not found data");
-            return response()->json($data, 404);
-        }
-        $ChatGroupCache->update($request->all());
-        return response()->json($ChatGroupCache, 200);
+         $ChatGroup = ChatGroup::find($id);
+        // //if(is_null($user)){
+        //     $data = array('data' => "Not found data");
+        //     return response()->json($data, 404);
+        // //}
+        // $ChatGroup->update($request->all());
+        return response()->json($ChatGroup, 200);
     }
 
     /**
@@ -94,7 +95,7 @@ class ChatGroupController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $data = ChatGroupCacheDB::update($request->all());
+            $data = ChatGroup::update($request->all());
             return response()->json($data, 201);
         }catch(\Exception $exception){
             return response()->json($exception, 400);
@@ -109,12 +110,12 @@ class ChatGroupController extends Controller
      */
     public function destroy($id)
     {
-        $ChatGroupCacheDB = ChatGroupCacheDB::find($id);
-        if(is_null($ChatGroupCacheDB)){
+        $ChatGroupDB = ChatGroup::find($id);
+        if(is_null($ChatGroupDB)){
             $data = array('data' => "Not found data");
             return response()->json($data, 404);
         }
-        $ChatGroupCacheDB->delete();
+        $ChatGroupDB->delete();
         $data = array('data' => "record is delete" );
         return response()->json($data, 204);
     }

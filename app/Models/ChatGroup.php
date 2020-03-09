@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChatGroup extends Model
 {
-    protected $table = "";
+    protected $table = "chat_groups";
     protected $fillable = ['Name', 'Owner', 'IsDelete'];
 }

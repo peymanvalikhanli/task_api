@@ -29,4 +29,24 @@ Route::apiResource('chatgroupconversion','Chat\ChatGroupConversionController');
 Route::apiResource('chatgroup','Chat\ChatGroupController');
 
 Route::post('Register', 'Users\globalController@register');
-Route::post('Login', 'Users\globalController@login'); 
+Route::post('Login', 'Users\globalController@login');
+Route::post('RecoveryPass', 'Users\globalController@recovery_pass'); 
+Route::post('ChangePass', 'Users\globalController@change_pass'); 
+Route::post('Contact', 'Users\globalController@contact_list'); 
+Route::post('ChatHistory', 'Chat\globalController@chat_history'); 
+Route::post('ChatList', 'Chat\globalController@chat_list'); 
+Route::post('GroupList', 'Chat\globalController@group_list'); 
+Route::post('CreateGroup', 'Chat\globalController@create_group'); 
+Route::post('GroupHistory', 'Chat\globalController@group_history'); 
+Route::post('SendMessage', 'Chat\globalController@send_message'); 
+Route::post('SendMessageGroup', 'Chat\globalController@send_message_group'); 
+Route::post('DeleteMessage', 'Chat\globalController@delete_message'); 
+Route::post('DeleteMessageGroup', 'Chat\globalController@delete_message_group'); 
+Route::post('SendFileChat', 'Chat\globalController@send_file_chat');
+
+//chanel auth
+Route::post('auth', 'users\globalController@auth');
+
+
+
+

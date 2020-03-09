@@ -17,7 +17,7 @@ class CreateChatGroupsTable extends Migration
             $table->bigIncrements('id');
             $table->string('Name', 50)->nullable();
             $table->bigInteger('Owner')->nullable();
-            $table->boolean('IsDelete')->nullable()->default(false);
+            $table->boolean('IsDelete')->nullable()->default(false)->default('0');
             $table->timestamps();
         });
     }

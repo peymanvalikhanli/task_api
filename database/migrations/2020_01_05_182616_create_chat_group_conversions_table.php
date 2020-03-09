@@ -19,9 +19,9 @@ class CreateChatGroupConversionsTable extends Migration
             $table->bigInteger('TO')->nullable();
             $table->string('Title', 50)->nullable();
             $table->mediumText('Content')->nullable();
-            $table->integer('ChatType')->unsigned()->nullable();
+            $table->integer('ChatType')->unsigned()->nullable()->default('1');
             $table->string('File', 150)->nullable()->default('No File');
-            $table->boolean('IsDelete')->nullable()->default(false);
+            $table->boolean('IsDelete')->nullable()->default(false)->default('0');
             $table->timestamp('SeenDate')->nullable();
             $table->timestamps();
         });

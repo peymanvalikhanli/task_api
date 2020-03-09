@@ -16,11 +16,11 @@ class CreateChatGroupUsersTable extends Migration
         Schema::create('chat_group__users', function (Blueprint $table) {
             $table->bigInteger('ChatGroupID');
             $table->bigInteger('UserID');
-            $table->integer('Permission')->unsigned()->nullable();
-            $table->integer('RemoveFromGroup')->unsigned()->nullable();
-            $table->integer('RemoveBy')->unsigned()->nullable();
+            $table->integer('Permission')->unsigned()->nullable()->default('1');
+            $table->integer('RemoveFromGroup')->unsigned()->nullable()->default('0');
+            $table->integer('RemoveBy')->unsigned()->nullable()->default('0');
             $table->timestamp('RemoveDate')->nullable();
-            $table->integer('LeaveGroup')->unsigned()->nullable();
+            $table->integer('LeaveGroup')->unsigned()->nullable()->default('0');
             $table->timestamp('LeaveDate')->nullable();
             $table->timestamps();
             $table->primary(['ChatGroupID', 'UserID']);

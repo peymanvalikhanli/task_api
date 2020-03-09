@@ -64,8 +64,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {   
-        $request=  \Request::get('user_id');
-        return response()->json($request,200);
+        // $request=  \Request::get('user_id');
+        // return response()->json($request,200);
         if (is_numeric($id))
         {
             return response()->json(Users::find($id), 200);

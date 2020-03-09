@@ -1,6 +1,6 @@
 {
 	"authHost": "http://164.138.18.90:8080/mbiz/task_api/public",
-	"authEndpoint": "/broadcasting/auth",
+	"authEndpoint": "/api/auth",
 	"clients": [
 		{
 			"appId": "fc75112fe23442af",
