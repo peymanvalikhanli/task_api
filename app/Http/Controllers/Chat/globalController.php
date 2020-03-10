@@ -131,7 +131,7 @@ class globalController extends Controller
         // $event = new PostCreatedEvent(["name"=>"peyman"]);
         // event($event);
         // dd();
-        $user = Users::select("token")->where('id','=','1')->first(); 
+        $user = Users::select("token")->where('id','=',$message->TO)->first(); 
 
         broadcast(new PostCreatedEvent(["data" => $message , "token" => $user->token]));
 
