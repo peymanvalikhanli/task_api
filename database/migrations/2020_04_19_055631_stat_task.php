@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChatGroupsTable extends Migration
+class StatTask extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateChatGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chat_groups', function (Blueprint $table) {
+        Schema::create('stat_task', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Name', 50)->nullable();
-            $table->bigInteger('Owner')->nullable();
-            $table->boolean('IsDelete')->nullable()->default(false)->default('0');
+            $table->string('name', 50)->nullable();
             $table->timestamps();
-            $table->unique(['Name','Owner']);
         });
     }
 
@@ -30,6 +27,6 @@ class CreateChatGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chat_groups');
+        //
     }
 }

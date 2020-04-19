@@ -128,12 +128,13 @@ class globalController extends Controller
             "ChatType" => 1,
         ];
         $message =  ChatP2P::create($message_data);
+
         // $event = new PostCreatedEvent(["name"=>"peyman"]);
         // event($event);
         // dd();
         $user = Users::select("token")->where('id','=',$message->TO)->first(); 
-
-        broadcast(new PostCreatedEvent(["data" => $message , "token" => $user->token]));
+        $from =  Users::select("name")->where('id','=',$message->From)->first(); 
+        broadcast(new PostCreatedEvent(["data" => $message ,"From"=> $from->name , "token" => $user->token]));
 
         $result = export::data("ChatHistory", $message);
         return response()->json($result, 200);
