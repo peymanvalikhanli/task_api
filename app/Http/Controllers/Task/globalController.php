@@ -107,4 +107,25 @@ class globalController extends Controller
         $result = export::data("SelectTaskLable", $task_label);
         return response()->json($result, 200);
     }
+    public function Change_task_description(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+        $task_description =TaskLabel::select('TaskID' ,'Dsc')->where("TaskID","=", $task_id )->update(['Dsc' => $request->description]);
+
+        $result = export::data("SelectTaskLable", $task_description);
+        return response()->json($result, 200);
+    }
+
+    public function select_task_due_date(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+        $task_DueDate = TaskLabel::select('TaskID' ,'DueDate')->where("TaskID","=", $task_id )->update(['DueDate' => $request->DueDate]);
+        $result = export::data("SelectTaskLable", $task_DueDate);
+        return response()->json($result, 200);
+
+    }
+
+
 }
