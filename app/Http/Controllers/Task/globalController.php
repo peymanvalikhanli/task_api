@@ -49,7 +49,7 @@ class globalController extends Controller
 
         //TaskMember::delete($task_id);
 
-        TaskMember::select('TaskID' ,'UserID')->where("TaskID","=", $task_id )->whereIn('UserID', $request->Members)->delete();
+        TaskMember::where("TaskID","=", $task_id )->whereIn('UserID', $request->Members)->delete();
 
         for ($index = 0; $index < count($request->Members); $index++) {
             $data =  [
