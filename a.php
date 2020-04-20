@@ -1,1 +1,3 @@
-trait_exists
+<?php
+
+echo "salam peyman";
