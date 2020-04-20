@@ -20,6 +20,7 @@ class Tasks extends Migration
             $table->integer('Stat')->unsigned()->default('0'); // todo | doing | done | cancel | ....
             $table->text('CheckLists')->nullable()->default(''); // json data intigration
             $table->timestamp('DueDate')->nullable();
+            $table->integer('CreatedBy')->unsigned()->default('0');
             $table->timestamps();
         });
     }
