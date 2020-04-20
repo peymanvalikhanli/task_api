@@ -49,7 +49,7 @@ class globalController extends Controller
 
         //TaskMember::delete($task_id);
 
-        $taskmember = TaskMember::select('TaskID' ,'UserID')->where("TaskID","=", $task_id )->whereNotIn('UserID', $request->Members)->delete();
+        TaskMember::select('TaskID' ,'UserID')->where("TaskID","=", $task_id )->whereNotIn('UserID', $request->Members)->delete();
 
         for ($index = 0; $index < count($request->Members); $index++) {
             $data =  [
@@ -88,7 +88,7 @@ class globalController extends Controller
         $userid = $request->user_id;
 
         $task_id = $request->TaskID;
-       // TaskLabel::delete($task_id);
+        TaskLabel::select('TaskID' ,'LabelID')->where("TaskID","=", $task_id )->whereNotIn('LabelID', $request->Lables)->delete();
         $task_label = array();
         for ($index = 0; $index < count($request->Lables); $index++) {
             $data =  [
