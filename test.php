@@ -1,4 +1,6 @@
 <?php
+
+echo "hello";
 function execPrint($command) {
     $result = array();
     exec($command, $result);
