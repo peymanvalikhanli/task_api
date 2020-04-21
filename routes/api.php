@@ -56,7 +56,7 @@ Route::post('TaskList', 'Task\globalController@task_list');
 Route::post('TaskProfile', 'Task\globalController@task_profile');
 Route::post('TaskMembers', 'Task\globalController@task_members');
 Route::post('TaskLabel', 'Task\globalController@task_label');
-Route::post('TaskLabel', 'Task\globalController@task_label');
+Route::post('CreateLabel', 'Task\globalController@create_label');
 
 //chanel auth
 Route::post('auth', 'users\globalController@auth');
