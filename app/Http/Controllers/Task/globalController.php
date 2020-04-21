@@ -114,7 +114,7 @@ class globalController extends Controller
         $userid = $request->user_id;
         $task_id = $request->TaskID;
 
-        $task_description =Tasks::select('id' ,'Dsc')->where("id","=", $task_id )->update(['Dsc' => $request->description])->get();
+        $task_description =Tasks::where("id","=", $task_id )->update(['Dsc' => $request->description]);
 
         $result = export::data("ChangeTaskDescription", $task_description);
         return response()->json($result, 200);
