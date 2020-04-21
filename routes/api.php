@@ -44,18 +44,19 @@ Route::post('DeleteMessage', 'Chat\globalController@delete_message');
 Route::post('DeleteMessageGroup', 'Chat\globalController@delete_message_group');
 Route::post('SendFileChat', 'Chat\globalController@send_file_chat');
 
-Route::post('CreatTask', 'Task\globalController@create_task');
+Route::post('CreateTask', 'Task\globalController@create_task');
 Route::post('SelectTaskMembers', 'Task\globalController@select_task_members');
 Route::post('SelectTaskLable', 'Task\globalController@Select_task_lable');
 Route::post('ChangeTaskDescription', 'Task\globalController@Change_task_description');
-Route::post('SelectTaskDueDate', 'Task\globalController@selectTaskduedate');
-Route::post('ChangeTaskCheckList', 'Task\globalController@create_task');
-Route::post('AddTaskAttachment', 'Task\globalController@create_task');
-Route::post('SendTaskComment', 'Task\globalController@create_task');
-Route::post('TaskList', 'Task\globalController@create_task');
-Route::post('TaskProfile', 'Task\globalController@create_task');
-Route::post('TaskMembers', 'Task\globalController@create_task');
-Route::post('TaskLabel', 'Task\globalController@create_task');
+Route::post('SelectTaskDueDate', 'Task\globalController@select_task_due_date');
+Route::post('ChangeTaskCheckList', 'Task\globalController@change_task_check_list');
+Route::post('AddTaskAttachment', 'Task\globalController@add_task_attachment');
+Route::post('SendTaskComment', 'Task\globalController@send_task_comment');
+Route::post('TaskList', 'Task\globalController@task_list');
+Route::post('TaskProfile', 'Task\globalController@task_profile');
+Route::post('TaskMembers', 'Task\globalController@task_members');
+Route::post('TaskLabel', 'Task\globalController@task_label');
+Route::post('TaskLabel', 'Task\globalController@task_label');
 
 //chanel auth
 Route::post('auth', 'users\globalController@auth');

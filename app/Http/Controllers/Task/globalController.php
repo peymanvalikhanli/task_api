@@ -12,6 +12,8 @@ use App\Models\Users;
 use App\Models\Tasks;
 use App\Models\TaskMember;
 use App\Models\TaskLabel;
+use App\Models\TaskComment;
+
 
 use App\Http\controllers\export;
 use App\Http\controllers\message_type;
@@ -43,13 +45,11 @@ class globalController extends Controller
     public function select_task_members(Request $request)
     {
         $userid = $request->user_id;
-
         $task_id = $request->TaskID;
-        $task_member = array();
 
-        //TaskMember::delete($task_id);
 
         TaskMember::select('TaskID' ,'UserID')->where("TaskID","=", $task_id )->whereNotIn('UserID', $request->Members)->delete();
+        $task_member = array();
 
         for ($index = 0; $index < count($request->Members); $index++) {
             $data =  [
@@ -79,6 +79,7 @@ class globalController extends Controller
 
             $task_member[count($request->Members)] = false;
         }
+
         $result = export::data("SelectTaskMembers", $task_member);
         return response()->json($result, 200);
     }
@@ -86,10 +87,11 @@ class globalController extends Controller
     public function Select_task_lable(Request $request)
     {
         $userid = $request->user_id;
-
         $task_id = $request->TaskID;
+
         TaskLabel::select('TaskID' ,'LabelID')->where("TaskID","=", $task_id )->whereNotIn('LabelID', $request->Lables)->delete();
         $task_label = array();
+
         for ($index = 0; $index < count($request->Lables); $index++) {
             $data =  [
                 'TaskID' =>  $task_id,
@@ -111,9 +113,10 @@ class globalController extends Controller
     {
         $userid = $request->user_id;
         $task_id = $request->TaskID;
-        $task_description =TaskLabel::select('TaskID' ,'Dsc')->where("TaskID","=", $task_id )->update(['Dsc' => $request->description]);
 
-        $result = export::data("SelectTaskLable", $task_description);
+        $task_description =Tasks::select('TaskID' ,'Dsc')->where("TaskID","=", $task_id )->update(['Dsc' => $request->description]);
+
+        $result = export::data("ChangeTaskDescription", $task_description);
         return response()->json($result, 200);
     }
 
@@ -121,11 +124,110 @@ class globalController extends Controller
     {
         $userid = $request->user_id;
         $task_id = $request->TaskID;
-        $task_DueDate = TaskLabel::select('TaskID' ,'DueDate')->where("TaskID","=", $task_id )->update(['DueDate' => $request->DueDate]);
-        $result = export::data("SelectTaskLable", $task_DueDate);
-        return response()->json($result, 200);
 
+        $task_DueDate = Tasks::select('TaskID' ,'DueDate')->where("TaskID","=", $task_id )->update(['DueDate' => $request->DueDate]);
+
+        $result = export::data("SelectTaskDueDate", $task_DueDate);
+        return response()->json($result, 200);
     }
+
+    public function change_task_check_list(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+
+        $task_CheckLists = Tasks::select('TaskID' ,'CheckLists')->where("TaskID","=", $task_id )->update(['CheckLists' => $request->CheckLists]);
+
+        $result = export::data("ChangeTaskCheckList", $task_CheckLists);
+        return response()->json($result, 200);
+    }
+
+    public function add_task_attachment(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+
+        //TODO: peyman
+
+        $result = export::data("AddTaskAttachment", "TODO: peyman");
+        return response()->json($result, 200);
+    }
+
+    public function send_task_comment(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+
+        $comment = array(
+            "TaskID" => $task_id,
+            "UserID" => $userid,
+            "Text" => $request->text,
+        );
+
+        $task = TaskComment::create($task_data);
+
+        $result = export::data("SendTaskComment", $task);
+        return response()->json($result, 200);
+    }
+
+    public function task_list(Request $request)
+    {
+        $userid = $request->user_id;
+
+        $tasks = Tasks::select("tasks.id","tasks.name","tasks.DueDate","tasks.created_at","tasks.updated_at")->join('task_member', 'tasks.id', '=', 'task_member.TaskID')->where('task_member.UserID', '=', $userid)->get();
+
+        $result = export::data("TaskList", $tasks);
+        return response()->json($result, 200);
+    }
+
+    public function task_profile(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+
+        $tasks = Tasks::select("tasks.*")->where('tasks.id', '=', $task_id)->get();
+
+        $result = export::data("TaskProfile", $tasks);
+        return response()->json($result, 200);
+    }
+
+    public function task_members(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+
+        $tasks = TaskMember::select("task_member.*", "users.name", "users.email", "users.UserName")->join('users', 'users.id', '=', 'task_member.UserID')->where('task_member.TaskID', '=', $task_id)->get();
+
+        $result = export::data("TaskMembers", $tasks);
+        return response()->json($result, 200);
+    }
+
+    public function task_label(Request $request)
+    {
+        $userid = $request->user_id;
+        $task_id = $request->TaskID;
+
+        $tasks = Label::select("label.*")->join('task_label', 'label.id', '=', 'task_label.LabelID')->where('task_label.TaskID', '=', $task_id)->get();
+
+        $result = export::data("TaskLabel", $tasks);
+        return response()->json($result, 200);
+    }
+
+    public function create_label(Request $request)
+    {
+        $userid = $request->user_id;
+
+        $task_data  = array(
+            "name" => $request->Name,
+            "color" => $request->Color,
+        );
+
+        $task = Label::create($task_data);
+
+        $result = export::data("CreateLabel", $task);
+        return response()->json($result, 200);
+    }
+
 
 
 }
