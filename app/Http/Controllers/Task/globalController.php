@@ -174,7 +174,7 @@ class globalController extends Controller
     {
         $userid = $request->user_id;
 
-        $tasks = Tasks::select("tasks.id","tasks.name","tasks.DueDate","tasks.created_at","tasks.updated_at")->join('task_member', 'tasks.id', '=', 'task_member.TaskID')->where('task_member.UserID', '=', $userid)->get();
+        $tasks = Tasks::select("tasks.id","tasks.name","tasks.Stat","tasks.DueDate","tasks.created_at","tasks.updated_at")->join('task_member', 'tasks.id', '=', 'task_member.TaskID')->where('task_member.UserID', '=', $userid)->get();
 
         $result = export::data("TaskList", $tasks);
         return response()->json($result, 200);
