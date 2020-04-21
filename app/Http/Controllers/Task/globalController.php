@@ -13,7 +13,7 @@ use App\Models\Tasks;
 use App\Models\TaskMember;
 use App\Models\TaskLabel;
 use App\Models\TaskComment;
-
+use App\Models\Label;
 
 use App\Http\controllers\export;
 use App\Http\controllers\message_type;
@@ -114,7 +114,7 @@ class globalController extends Controller
         $userid = $request->user_id;
         $task_id = $request->TaskID;
 
-        $task_description =Tasks::select('TaskID' ,'Dsc')->where("TaskID","=", $task_id )->update(['Dsc' => $request->description]);
+        $task_description =Tasks::select('id' ,'Dsc')->where("id","=", $task_id )->update(['Dsc' => $request->description]);
 
         $result = export::data("ChangeTaskDescription", $task_description);
         return response()->json($result, 200);
@@ -164,7 +164,7 @@ class globalController extends Controller
             "Text" => $request->text,
         );
 
-        $task = TaskComment::create($task_data);
+        $task = TaskComment::create($comment);
 
         $result = export::data("SendTaskComment", $task);
         return response()->json($result, 200);
@@ -223,6 +223,16 @@ class globalController extends Controller
         );
 
         $task = Label::create($task_data);
+
+        $result = export::data("CreateLabel", $task);
+        return response()->json($result, 200);
+    }
+    public function label_list(Request $request)
+    {
+        $userid = $request->user_id;
+
+
+        $task = Label::get();
 
         $result = export::data("CreateLabel", $task);
         return response()->json($result, 200);
